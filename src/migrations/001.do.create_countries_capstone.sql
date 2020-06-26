@@ -5,7 +5,7 @@ CREATE TABLE countries (
     nicename varchar NOT NULL,
     iso3 varchar DEFAULT NULL,
     numcode numeric DEFAULT NULL,
-    phonecode numeric NOT NULL,
+    phonecode numeric NOT NULL
 );
 
 INSERT INTO public.countries (id, iso, name, nicename, iso3, numcode, phonecode) VALUES

@@ -7,7 +7,7 @@ const jsonParser = express.json()
 
 const serializeCountries = country => ({
     id: country.id,
-    country_name: country.country_name,
+    country_name: country.name
 })
 countriesRouter
 .route('/countries')
@@ -24,8 +24,8 @@ countriesRouter
 })
 
 .post(jsonParser, (req,res,next) => {
-    const {country_name} = req.body
-    const newCountry = {country_name}
+    const {name} = req.body
+    const newCountry = {name}
 
     for (const [key, value] of Object.entries(newCountry)) {
         if (value == null) {

@@ -1,7 +1,9 @@
 const CountriesService = {
     getAllCountries(knex) {
         return knex
-        .select('*').from('countries')
+        .from('countries')
+        .select('countries.id',
+                'countries.name')
         },
 
     insertCountry(knex,newCountry) {

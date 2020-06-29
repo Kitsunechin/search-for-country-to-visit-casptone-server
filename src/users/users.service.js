@@ -1,4 +1,11 @@
 const UsersService = {
+    getAllCountries(knex) {
+        return knex
+        .from('users')
+        .select('users_name',
+                'user_password',
+                'user_email')
+        },
 
     insertUser(knex,newUser) {
         return knex

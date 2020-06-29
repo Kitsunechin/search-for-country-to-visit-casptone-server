@@ -7,7 +7,7 @@ const jsonParser = express.json()
 
 const serializeCountries = country => ({
     id: country.id,
-    country_name: country.name
+    country_name: country.name,
 })
 countriesRouter
 .route('/countries')

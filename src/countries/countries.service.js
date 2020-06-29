@@ -4,7 +4,7 @@ const CountriesService = {
         .from('countries')
         .select('countries.id',
                 'countries.name')
-        },
+    },
 
     insertCountry(knex,newCountry) {
         return knex

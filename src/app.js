@@ -4,7 +4,9 @@ const morgan = require('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
-const countriesRouter = require('./countries/countries.router')
+const countriesRouter = require('./countries/all-countries-router')
+const visitedCountriesRouter = require('./countries/visited-countries-router')
+const bucketListRouter = require('./countries/bucket-list-countries-router')
 const usersRouter = require('./users/users.router')
 
 const app = express()
@@ -17,7 +19,9 @@ app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
 
-app.use('/api/countries', countriesRouter)
+app.use('/api/all', countriesRouter)
+app.use('/api/visited', visitedCountriesRouter)
+app.use('/api/bucket-list', bucketListRouter)
 app.use('/api/users', usersRouter)
 
 

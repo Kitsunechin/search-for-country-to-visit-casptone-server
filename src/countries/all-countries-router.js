@@ -1,51 +1,50 @@
 const express = require ('express')
 const  xss = require('xss')
-const CountriesService = require('./countries.service')
+const CountriesService = require('./all-countries-service')
 
 const countriesRouter = express.Router()
 const jsonParser = express.json()
 
-const serializeCountries = country => ({
-    id: country.id,
-    country_name: country.name,
-})
+// const serializeCountries = country => ({
+//     id: country.id,
+//     country_name: country.name,
+// })
 countriesRouter
-.route('/countries')
+.route('/')
 .get((req,res,next) => {
-    console.log('hello')
     const knexInstance = req.app.get('db')
     CountriesService.getAllCountries(knexInstance)
     .then(countries => {
-        console.log(countries)
-        res.json(countries.map(serializeCountries))
+        console.log('countries main',countries)
+        res.json(countries)
     })
     // .catch(next)
     .catch(err => console.log(err))
 })
 
-.post(jsonParser, (req,res,next) => {
-    const {name} = req.body
-    const newCountry = {name}
+// .post(jsonParser, (req,res,next) => {
+//     const {name} = req.body
+//     const newCountry = {name}
 
-    for (const [key, value] of Object.entries(newCountry)) {
-        if (value == null) {
-          return res.status(400).json({
-            error: { message: `Missing '${key}' in request body` }
-          })
-        }
-    }    
-    CountriesService.insertCountry(
-        req.app.get('db'),
-        newCountry
-    )
-    .then(country => {
-        res
-        .status(201)
-        .location(`/countries/${country.id}`)
-        .json(serializeCountries(country))
-    })
-    .catch(next)
-})
+//     for (const [key, value] of Object.entries(newCountry)) {
+//         if (value == null) {
+//           return res.status(400).json({
+//             error: { message: `Missing '${key}' in request body` }
+//           })
+//         }
+//     }    
+//     CountriesService.insertCountry(
+//         req.app.get('db'),
+//         newCountry
+//     )
+//     .then(country => {
+//         res
+//         .status(201)
+//         //.location(`/countries/${country.id}`)
+//         .json(serializeCountries(country))
+//     })
+//     .catch(next)
+// })
 
 countriesRouter
     .route('/:country_id')

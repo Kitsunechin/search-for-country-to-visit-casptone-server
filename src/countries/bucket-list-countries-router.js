@@ -51,7 +51,7 @@ bucketListRouter
         .status(201)
         // .location(`/bucket-list/${country.id}`)
         // .json(serializeCountries(country))
-        .json(countries)
+        .json(country)
     })
     .catch(next)
 })

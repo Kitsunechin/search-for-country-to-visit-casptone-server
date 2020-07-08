@@ -9,6 +9,7 @@ const serializeCountries = country => ({
     id: country.id,
     country_name: country.name,
 })
+
 visitedCountriesRouter
 .route('/')
 .get((req,res,next) => {
@@ -30,25 +31,26 @@ visitedCountriesRouter
 })
 
 .post(jsonParser, (req,res,next) => {
-    const {name} = req.body
-    const newCountry = {name}
-
-    for (const [key, value] of Object.entries(newCountry)) {
-        if (value == null) {
-          return res.status(400).json({
-            error: { message: `Missing '${key}' in request body` }
-          })
-        }
-    }    
+    // console.log('requestbody=>',req.body)
+    const {id, nicename} = req.body
+    const payload = {
+        user_id: 1,
+        country_id:id,
+        nicename:nicename,
+        is_visited:0,
+        is_wish_list:1,
+    }
+    // console.log('payload=>',payload)
     VisitedCountriesService.insertCountry(
         req.app.get('db'),
-        newCountry
+        payload
     )
     .then(country => {
         res
         .status(201)
-        //.location(`/visited/${country.id}`)
-        .json(serializeCountries(country))
+        // .location(`/bucket-list/${country.id}`)
+        // .json(serializeCountries(country))
+        .json(country)
     })
     .catch(next)
 })

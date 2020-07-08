@@ -7,12 +7,13 @@ const VisitedCountriesService = {
     },
 
     insertCountry(knex,newCountry) {
+        console.log('country=>',newCountry)
         return knex
         .insert(newCountry)
         .into('users_countries')
         .returning('*')
         .then(rows => {
-            return(rows[0])
+            return rows[0]
         })
     },
     getCountryById(knex,id) {

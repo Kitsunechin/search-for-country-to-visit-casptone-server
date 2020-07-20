@@ -27,12 +27,12 @@ bucketListRouter
             res.status(200).json(countries)
         }
     })
-    // .catch(next)
-    .catch(err => console.log(err))
+    .catch(next)
+    
 })
 
 .post(jsonParser, (req,res,next) => {
-    // console.log('requestbody=>',req.body)
+    
     const {id, nicename} = req.body
     const payload = {
         user_id: 1,
@@ -41,16 +41,15 @@ bucketListRouter
         is_visited:0,
         is_wish_list:1,
     }
-    // console.log('payload=>',payload)
+   
     bucketListService.insertCountry(
         req.app.get('db'),
         payload
     )
     .then(country => {
+        console.log('country.id==>',country)
         res
         .status(201)
-        // .location(`/bucket-list/${country.id}`)
-        // .json(serializeCountries(country))
         .json(country)
     })
     .catch(next)

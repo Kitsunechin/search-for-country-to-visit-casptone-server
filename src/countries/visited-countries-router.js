@@ -26,21 +26,20 @@ visitedCountriesRouter
             res.status(200).json(countries)
         }
     })
-    // .catch(next)
-    .catch(err => console.log(err))
+    .catch(next)
 })
 
 .post(jsonParser, (req,res,next) => {
-    // console.log('requestbody=>',req.body)
+    
     const {id, nicename} = req.body
     const payload = {
         user_id: 1,
         country_id:id,
         nicename:nicename,
-        is_visited:0,
-        is_wish_list:1,
+        is_visited:1,
+        is_wish_list:0,
     }
-    // console.log('payload=>',payload)
+   
     VisitedCountriesService.insertCountry(
         req.app.get('db'),
         payload
@@ -48,8 +47,6 @@ visitedCountriesRouter
     .then(country => {
         res
         .status(201)
-        // .location(`/bucket-list/${country.id}`)
-        // .json(serializeCountries(country))
         .json(country)
     })
     .catch(next)

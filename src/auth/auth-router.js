@@ -9,12 +9,10 @@ authRouter
 
     const {
       user_name,
-      user_email,
       user_password
     } = req.body
     const loginUser = {
       user_name,
-      user_email,
       user_password
     }
 

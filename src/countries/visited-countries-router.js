@@ -30,16 +30,16 @@ visitedCountriesRouter
 })
 
 .post(jsonParser, (req,res,next) => {
-    
-    const {id, nicename} = req.body
+    // console.log('body==>',req.body)
+    const {id, nicename, user_id} = req.body
     const payload = {
-        user_id: 1,
+        user_id:user_id,
         country_id:id,
         nicename:nicename,
         is_visited:1,
-        is_wish_list:0,
+        is_wish_list:0
     }
-   
+//    console.log('payload==>',payload)
     VisitedCountriesService.insertCountry(
         req.app.get('db'),
         payload
@@ -72,6 +72,29 @@ visitedCountriesRouter
     })
     .get((req,res,next) => {
         res.json(serializeCountries(res.country))
+    })
+
+
+visitedCountriesRouter
+    .route('/user/:user_id')
+    .all((req,res,next) => {
+        VisitedCountriesService.getCountryByUserId(
+            req.app.get('db'),
+            req.params.user_id
+        )
+        .then(country => {
+            if (!country) {
+                return res.status(404).json({
+                    error: {message: 'Country does not exist'}
+                })
+            }
+            res.country=country
+            next()
+        })
+        .catch(next)
+    })
+    .get((req,res,next) => {
+        res.json(res.country)
     })
 
 

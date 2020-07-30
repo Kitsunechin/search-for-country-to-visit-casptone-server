@@ -5,10 +5,10 @@ const bucketListService = require('./bucket-list-countries-service')
 const bucketListRouter = express.Router()
 const jsonParser = express.json()
 
-// const serializeCountries = country => ({
-//     id: country.id,
-//     country_name: country.name,
-// })
+const serializeCountries = country => ({
+    id: country.id,
+    country_name: country.name,
+})
 
 bucketListRouter
 .route('/')
@@ -33,13 +33,13 @@ bucketListRouter
 
 .post(jsonParser, (req,res,next) => {
     
-    const {id, nicename} = req.body
+    const {id, nicename, user_id} = req.body
     const payload = {
-        user_id: 1,
+        user_id:user_id,
         country_id:id,
         nicename:nicename,
         is_visited:0,
-        is_wish_list:1,
+        is_wish_list:1
     }
    
     bucketListService.insertCountry(
@@ -77,6 +77,27 @@ bucketListRouter
         res.json(serializeCountries(res.country))
     })
 
+bucketListRouter
+    .route('/user/:user_id')
+    .all((req,res,next) => {
+        bucketListService.getCountryByUserId(
+            req.app.get('db'),
+            req.params.user_id
+        )
+        .then(country => {
+            if (!country) {
+                return res.status(404).json({
+                    error: {message: 'Country does not exist'}
+                })
+            }
+            res.country=country
+            next()
+        })
+        .catch(next)
+    })
+    .get((req,res,next) => {
+        res.json(res.country)
+    })
 
 
 

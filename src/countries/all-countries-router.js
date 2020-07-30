@@ -15,7 +15,7 @@ countriesRouter
     const knexInstance = req.app.get('db')
     CountriesService.getAllCountries(knexInstance)
     .then(countries => {
-        console.log('countries main',countries)
+        // console.log('countries main',countries)
         res.json(countries)
     })
     // .catch(next)

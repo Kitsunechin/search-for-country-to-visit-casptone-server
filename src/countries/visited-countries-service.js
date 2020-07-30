@@ -24,5 +24,12 @@ const VisitedCountriesService = {
         .first()
     },
 
+    getCountryByUserId(knex,user_id) {
+        return knex
+        .from('users_countries')
+        .select('*')
+        .where({'user_id':user_id,"is_visited": 1})
+    },
+
 }
 module.exports = VisitedCountriesService

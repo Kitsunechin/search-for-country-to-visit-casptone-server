@@ -25,6 +25,13 @@ const BucketListService = {
         .first()
     },
 
+    getCountryByUserId(knex,user_id) {
+        return knex
+        .from('users_countries')
+        .select('*')
+        .where({'user_id':user_id,"is_wish_list": 1})
+    },
+
 }
 
 module.exports = BucketListService

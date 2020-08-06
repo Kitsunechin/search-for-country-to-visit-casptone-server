@@ -38,7 +38,7 @@ authRouter
               return res.status(400).json({
                 error: 'Incorrect email or password',
               })
-              
+
             const sub = dbUser.user_name
             const payload = {
               user_id: dbUser.id
@@ -52,7 +52,10 @@ authRouter
             })
           })
       })
-      .catch(next)
+      .catch(function(error) {
+        console.error(error);
+        next(error)
+      })
   })
 
 module.exports = authRouter

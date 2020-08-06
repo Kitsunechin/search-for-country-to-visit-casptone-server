@@ -44,6 +44,12 @@ const UsersService = {
             .where({ id })
             .delete()
     },
+
+    deleteAllUsers(knex,id) {
+        return knex('users')
+            .delete()
+    },
+
     getById(knex, id) {
         return knex
             .from('users')

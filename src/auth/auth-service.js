@@ -10,6 +10,7 @@ const AuthService = {
             .first()
     },
     comparePasswords(user_password, hash) {
+        console.log(user_password, hash)
         return bcrypt.compare(user_password, hash)
     },
     createJwt(subject, payload) {

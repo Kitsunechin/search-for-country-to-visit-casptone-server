@@ -14,7 +14,6 @@ bucketListRouter
 .route('/')
 .get((req,res,next) => {
     const knexInstance = req.app.get('db')
-    // console.log('bucket-list',knexInstance)
     bucketListService.getAllBucketList(knexInstance)
     .then(countries => {
         console.log('bucket',countries)

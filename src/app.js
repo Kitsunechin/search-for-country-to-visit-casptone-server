@@ -9,6 +9,7 @@ const visitedCountriesRouter = require('./countries/visited-countries-router')
 const bucketListRouter = require('./countries/bucket-list-countries-router')
 const authRouter = require('./auth/auth-router')
 const usersRouter = require('./users/users-router')
+const notesRouter = require('./notes/notes-router')
 
 const app = express()
 
@@ -26,6 +27,7 @@ app.use('/api/visited', visitedCountriesRouter)
 app.use('/api/bucket-list', bucketListRouter)
 app.use('/api/auth', authRouter)
 app.use('/api/users', usersRouter)
+app.use('/api/notes', notesRouter)
 
 
 app.get('/', (req, res) => {

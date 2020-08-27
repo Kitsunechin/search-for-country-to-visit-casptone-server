@@ -23,6 +23,7 @@ This app is for logged in users only
 * I want to be able to view a list of countries which I have visited
 * As a new and returning user 
 * I would like to be able to add new countries to the list of visited countries
+* As a new and returning user I would like to be able to add notes to countries
 
 #### Bucket-List Page
 * As a new and returning user 
@@ -30,6 +31,7 @@ This app is for logged in users only
 * As a new and returning user 
 * I would like to be able to pick a new country and add it to my “to visit” countries list
 * As a new and returning user I would like to view a map with the places I would like to visit in the future
+* As a new and returning user I would like to be able to add notes to countries
 
 #### Mobile Version
 * As a new and returning user 
@@ -98,6 +100,7 @@ The app's functionality includes:
 * Every user can add countries to the bucket-list countries
 * Every user can view his/her visited countries
 * Every user can add countries to the visited countries
+* Every user can add notes to the countries
 
 ## React Components Structure
 * __Index.js__ (stateless)
@@ -134,6 +137,11 @@ The app's functionality includes:
     * country_id ( connection with the id from the countries table)
     * is_visited (boolean default 0,1 if it is visited)
     * is_wish_list (boolean default 0,1 if it is wishlist)
+    
+* users_notes (database table)
+    * id
+    * user_country_id
+    * note_content
 
 ## Technology
 * Front-End: HTML5, CSS3, JavaScript ES6, React
@@ -142,6 +150,8 @@ The app's functionality includes:
 
 ## API Documentation
 API Documentation details:
+* get all notes => /api/notes
+* post notes => /api/notes
 * get all users => /api/users
 * get users by id => /api/users/:user_id
 * get all countries => /api/all

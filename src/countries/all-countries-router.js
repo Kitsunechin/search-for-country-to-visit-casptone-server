@@ -8,7 +8,7 @@ const jsonParser = express.json()
 const serializeCountries = country => ({
     id: country.id,
     country_name: country.name,
-})
+});
 
 countriesRouter
 .route('/')
@@ -16,10 +16,8 @@ countriesRouter
     const knexInstance = req.app.get('db')
     CountriesService.getAllCountries(knexInstance)
     .then(countries => {
-        // console.log('countries main',countries)
         res.json(countries)
     })
-    // .catch(next)
     .catch(err => console.log(err))
 })
 

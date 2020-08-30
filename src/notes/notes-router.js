@@ -16,15 +16,12 @@ notesRouter
     const knexInstance = req.app.get('db')
     NotesService.getAllNotes(knexInstance)
     .then(notes => {
-        // console.log('notes main',notes)
         res.json(notes)
     })
-    // .catch(next)
     .catch(err => console.log(err))
 })
 
 .post(jsonParser, (req,res,next) => {
-    // console.log('body==>',req.body)
     const {user_country_id, note_content} = req.body
     const payload = {
         user_country_id: user_country_id,

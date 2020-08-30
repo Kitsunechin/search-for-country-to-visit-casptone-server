@@ -1,14 +1,14 @@
-const express = require ('express')
-const  xss = require('xss')
-const VisitedCountriesService = require('./visited-countries-service')
+const express = require ('express');
+const  xss = require('xss');
+const VisitedCountriesService = require('./visited-countries-service');
 
-const visitedCountriesRouter = express.Router()
-const jsonParser = express.json()
+const visitedCountriesRouter = express.Router();
+const jsonParser = express.json();
 
 const serializeCountries = country => ({
     id: country.id,
     country_name: country.name,
-})
+});
 
 visitedCountriesRouter
 .route('/')
@@ -30,7 +30,6 @@ visitedCountriesRouter
 })
 
 .post(jsonParser, (req,res,next) => {
-    // console.log('body==>',req.body)
     const {id, nicename, user_id} = req.body
     const payload = {
         user_id:user_id,
@@ -39,7 +38,6 @@ visitedCountriesRouter
         is_visited:1,
         is_wish_list:0
     }
-//    console.log('payload==>',payload)
     VisitedCountriesService.insertCountry(
         req.app.get('db'),
         payload
@@ -72,7 +70,7 @@ visitedCountriesRouter
     })
     .get((req,res,next) => {
         res.json(serializeCountries(res.country))
-    })
+    });
 
 
 visitedCountriesRouter
@@ -95,7 +93,7 @@ visitedCountriesRouter
     })
     .get((req,res,next) => {
         res.json(res.country)
-    })
+    });
 
 
 

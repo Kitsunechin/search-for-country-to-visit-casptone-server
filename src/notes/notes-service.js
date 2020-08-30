@@ -6,7 +6,6 @@ const NotesService = {
     },
 
     insertNote(knex,newNote) {
-        console.log('note=>',newNote)
         return knex
         .insert(newNote)
         .into('users_notes')

@@ -11,7 +11,6 @@ usersRouter
     .get((req, res, next) => {
         UsersService.getAllUsers(req.app.get('db'))
         .then(user => {
-            console.log('User:', user)
             res.json(user)
         })
         .catch(next)
@@ -19,16 +18,12 @@ usersRouter
     .post(jsonBodyParser, (req, res, next) => {
         const { user_name, user_email, user_password } = req.body
 
-        console.log("user_name:", user_name,"user_email:", user_email, "user_password:", user_password);
-
         for (const field of ['user_name','user_email', 'user_password'])
             if (!req.body[field])
                 return res.status(400).json({
                     error: `Missing '${field}' in request body`
                 })
         const passwordError = UsersService.validatePassword(user_password)
-
-        console.log("password error:",passwordError);
 
         if (passwordError)
             return res.status(400).json({ error: passwordError })

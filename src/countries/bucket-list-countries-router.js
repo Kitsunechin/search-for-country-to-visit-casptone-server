@@ -1,9 +1,9 @@
-const express = require ('express')
-const  xss = require('xss')
-const bucketListService = require('./bucket-list-countries-service')
+const express = require ('express');
+const  xss = require('xss');
+const bucketListService = require('./bucket-list-countries-service');
 
-const bucketListRouter = express.Router()
-const jsonParser = express.json()
+const bucketListRouter = express.Router();
+const jsonParser = express.json();
 
 const serializeCountries = country => ({
     id: country.id,
@@ -74,7 +74,7 @@ bucketListRouter
     })
     .get((req,res,next) => {
         res.json(serializeCountries(res.country))
-    })
+    });
 
 bucketListRouter
     .route('/user/:user_id')
@@ -96,7 +96,7 @@ bucketListRouter
     })
     .get((req,res,next) => {
         res.json(res.country)
-    })
+    });
 
 
 

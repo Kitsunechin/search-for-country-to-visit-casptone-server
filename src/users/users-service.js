@@ -1,4 +1,4 @@
-const xss = require('xss')
+const xss = require('xss');
 const bcrypt = require('bcryptjs')
 
 const UsersService = {

@@ -1,4 +1,4 @@
-# Search for Country to Visit
+# Trippster
 The app allows its users to search for countries and add them to their bucket-list
 
 ## Working Prototype
@@ -137,7 +137,7 @@ The app's functionality includes:
     * country_id ( connection with the id from the countries table)
     * is_visited (boolean default 0,1 if it is visited)
     * is_wish_list (boolean default 0,1 if it is wishlist)
-    
+
 * users_notes (database table)
     * id
     * user_country_id

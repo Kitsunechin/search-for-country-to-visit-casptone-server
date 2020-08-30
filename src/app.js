@@ -43,6 +43,6 @@ app.use((error, req, res, next) => {
       response = { error }
     }
     res.status(500).json(response)
-  });
+  })
 
 module.exports = app

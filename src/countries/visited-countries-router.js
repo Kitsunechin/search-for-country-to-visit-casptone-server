@@ -1,9 +1,9 @@
-const express = require ('express');
-const  xss = require('xss');
-const VisitedCountriesService = require('./visited-countries-service');
+const express = require ('express')
+const  xss = require('xss')
+const VisitedCountriesService = require('./visited-countries-service')
 
-const visitedCountriesRouter = express.Router();
-const jsonParser = express.json();
+const visitedCountriesRouter = express.Router()
+const jsonParser = express.json()
 
 const serializeCountries = country => ({
     id: country.id,
@@ -93,7 +93,7 @@ visitedCountriesRouter
     })
     .get((req,res,next) => {
         res.json(res.country)
-    });
+    })
 
 
 

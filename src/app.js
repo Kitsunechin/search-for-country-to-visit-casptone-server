@@ -11,23 +11,23 @@ const authRouter = require('./auth/auth-router')
 const usersRouter = require('./users/users-router')
 const notesRouter = require('./notes/notes-router')
 
-const app = express();
+const app = express()
 
 const morganOption = (NODE_ENV === 'production')
   ? 'tiny'
   : 'common';
 
-app.use(morgan(morganOption));
+app.use(morgan(morganOption))
 app.use(cors());
 app.use(helmet());
 
 
-app.use('/api/all', countriesRouter);
-app.use('/api/visited', visitedCountriesRouter);
-app.use('/api/bucket-list', bucketListRouter);
-app.use('/api/auth', authRouter);
-app.use('/api/users', usersRouter);
-app.use('/api/notes', notesRouter);
+app.use('/api/all', countriesRouter)
+app.use('/api/visited', visitedCountriesRouter)
+app.use('/api/bucket-list', bucketListRouter)
+app.use('/api/auth', authRouter)
+app.use('/api/users', usersRouter)
+app.use('/api/notes', notesRouter)
 
 
 app.get('/', (req, res) => {
